@@ -15,7 +15,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.3.2/dist/css/bootstrap.min.css}" />
     <link th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}" rel="stylesheet">
 
 
@@ -74,6 +74,7 @@
     </div>
   </div>
 
+  <script th:src="@{/webjars/htmx.org/1.9.10/dist/htmx.js}"></script>
   <script th:src="@{/webjars/bootstrap/5.3.2/dist/js/bootstrap.bundle.min.js}"></script>
 
 </body>
