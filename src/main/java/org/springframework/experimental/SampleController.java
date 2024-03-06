@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class SampleController {
@@ -20,6 +22,14 @@ public class SampleController {
 	String greet(Map<String, Object> model) {
 		model.put("greeting", "Hello World");
 		model.put("time", new Date());
+		return "greet";
+	}
+
+	@PostMapping(path = "/greet")
+	String name(Map<String, Object> model, @RequestParam String name) {
+		greet(model);
+		model.put("greeting", "Hello " + name);
+		model.put("name", name);
 		return "greet";
 	}
 
