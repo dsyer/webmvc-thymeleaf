@@ -11,9 +11,16 @@ public class SampleController {
 
 	@GetMapping(path = "/")
 	String user(Map<String, Object> model) {
-		model.put("greeting", "Hello World");
+		model.put("message", "Welcome");
 		model.put("time", new Date());
 		return "index";
+	}
+
+	@GetMapping(path = "/greet")
+	String greet(Map<String, Object> model) {
+		model.put("greeting", "Hello World");
+		model.put("time", new Date());
+		return "greet";
 	}
 
 }

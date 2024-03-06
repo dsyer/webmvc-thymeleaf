@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+
+<html xmlns:th="https://www.thymeleaf.org" th:replace="~{layout :: layout (~{::body},'greet')}">
+
+  <body>
+
+    <h2 th:text="#{greeting}">Welcome</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <span th:text="${greeting}">Hello, World</span> at <span th:text="${time}">21:00</span>
+        </div>
+    </div>
+
+  </body>
+
+</html>
