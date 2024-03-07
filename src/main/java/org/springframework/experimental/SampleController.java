@@ -33,4 +33,10 @@ public class SampleController {
 		return "greet";
 	}
 
+	@PostMapping(path = "/greet", headers = "hx-request=true")
+	String nameHtmx(Map<String, Object> model, @RequestParam String name) {
+		name(model, name);
+		return "greet :: content";
+	}
+
 }
