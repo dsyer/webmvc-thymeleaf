@@ -15,8 +15,8 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.3.2/dist/css/bootstrap.min.css}" />
-    <link th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.3.2/dist/css/bootstrap.min.css}" />
+  <link th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}" rel="stylesheet">
 
 
 </head>
@@ -66,8 +66,14 @@
       <br />
       <div class="container">
         <div class="row">
-          <div class="col-12">
-            <img src="../static/images/spring-logo.svg" th:src="@{/images/spring-logo.svg}" alt="Logo" style="width:200px;" loading="lazy">
+          <div class="col-12" hx-get="/logo" hx-trigger="load">
+            <span class="fa fa-spin fa-spinner" style="width:200px; text-align:center;">
+          </div>
+        </div>
+        <div class="row" th:remove="all">
+          <div class="col-12" th:fragment="logo">
+            <img src="../static/images/spring-logo.svg" th:src="@{/images/spring-logo.svg}" alt="Logo"
+              style="width:200px;" loading="lazy">
           </div>
         </div>
       </div>

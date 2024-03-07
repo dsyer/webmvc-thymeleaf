@@ -25,6 +25,11 @@ public class SampleController {
 		return "greet";
 	}
 
+	@GetMapping(path = "/logo")
+	String logo() {
+		return "layout :: logo";
+	}
+
 	@PostMapping(path = "/greet")
 	String name(Map<String, Object> model, @RequestParam String name) {
 		greet(model);
