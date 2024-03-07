@@ -16,6 +16,7 @@
 	<properties>
 		<webjars-bootstrap.version>5.3.2</webjars-bootstrap.version>
 		<webjars-font-awesome.version>4.7.0</webjars-font-awesome.version>
+		<webjars-unpoly.version>3.7.3</webjars-unpoly.version>
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
@@ -36,6 +37,11 @@
 			<groupId>org.webjars.npm</groupId>
 			<artifactId>font-awesome</artifactId>
 			<version>${webjars-font-awesome.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>unpoly</artifactId>
+			<version>${webjars-unpoly.version}</version>
 		</dependency>
 
 		<dependency>
