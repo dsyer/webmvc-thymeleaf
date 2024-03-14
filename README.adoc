@@ -49,7 +49,7 @@ The simplest way to do that would be to grab it from a CDN and add it to the `la
 <script src='https://unpkg.com/htmx.org/dist/htmx.min.js'></script>
 ```
 
-In the "htmx" branch of the sample code we used a https://webjars.org[Webjar] to load the library into the classpath. Spring can do some extra stuff to help the browser cache the library, and it can also help with version management.
+Instead of this, in the "htmx" branch of the sample code we used a https://webjars.org[Webjar] to load the library into the classpath, so that would work as well. Spring can do some extra stuff to help the browser cache the library, and it can also help with version management.
 
 ### Form Processing
 
@@ -70,7 +70,7 @@ That isn't what we want in this case because the form controls some content in a
 <form th:action="@{/greet}" th:hx-post="@{/greet}" method="post" hx-target="#content">
 ```
 
-where the "content" element has been identified by ID. Turning to that element, we need the ID and the `hx-swap-oob` attribute to tell HTMX that incoming content should replace the existing content ("out of band" from the original submit action):
+where the "content" element has been identified by ID. Turning to that element, we need the ID and also an `hx-swap-oob` attribute to tell HTMX that incoming content should replace the existing content ("out of band" from the original submit action):
 
 ```html
 <div id="content" class="col-md-12" hx-swap-oob="true">
@@ -106,11 +106,11 @@ String nameHtmx(Map<String, Object> model, @RequestParam String name) {
 }
 ```
 
+(The "::" syntax is a Thymeleaf feature that allows you to render a fragment of a template. This one says, find the "greet" template and look for a fragment called "content".)
+
 If you submit the form now, and look at the network activity in the browser developer tools, you will see that the server is only returning the fragment of the page that is needed to update the content.
 
 image:images/network.jpg[Greet Fragment]
-
-(The "::" syntax is a Thymeleaf feature that allows you to render a fragment of a template. This one says, find the "greet" template and look for a fragment called "content".)
 
 ### Lazy Loading
 
@@ -230,8 +230,8 @@ and the "turbo" branch in the sample code uses Webjars, as before. The basic for
 
 Instead of custom attributes identifying the form processing interaction, Turbo uses a custom element (`turbo-frame`) to identify the content that is going to be replaced. The rest of the form is unchanged.
 
-To convert to a fragment template, we would need to add a `th:fragment` and a controller method that matches a unique header from Turbo, e.g. `Turbo-Frame`.
+To convert to a fragment template, we would need to add a `th:fragment` declaration to the `<turbo-frame>` and a controller method that matches a unique header from Turbo, e.g. `Turbo-Frame`.
 
 ## Conclusion
 
-HTMX is very focused on simple hypermedia enhancements and, while it has evolved to include some extra features as plugins, it stays true to its original vision of simulating a next-generation browser and keeping the feature set as narrow as possible. (It also has a very entertaining social media presence, if you like that sort of thing.) The other two libraries are more ambitious and cover a lot more ground, but they share enough common ground with HTMX that the examples we have looked at here are very similar.
+HTMX is very focused on simple hypermedia enhancements and, while it has evolved to include some extra features (mostly as plugins), it stays true to its original vision of simulating a next-generation browser and keeping the feature set as narrow as possible. It also has a very entertaining social media presence, if you like that sort of thing. The other two libraries are more ambitious and cover a lot more ground, but they share enough with HTMX that the examples we have looked at here are very similar. Any server side framework that can generate HTML can be used with these libraries, and they can be used to enhance the browser experience without the need for a large JavaScript framework. They are also a good fit for server side frameworks like Spring Boot, because they allow you to use the server to generate the content and the behaviour of the page. The templates are best rendered on the server with an engine that knows about fragments, so Thymeleaf was working fine, but there are other choices. There's also nothing stopping you from using HTMX (and friends) with a full JavaScript framework, and if you like it you can start to slowly replace framework components with hypermedia interactions.
