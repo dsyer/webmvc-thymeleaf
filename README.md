@@ -1,8 +1,8 @@
 # Hypermedia and Browser Enhancement
 
-Front end development these days is dominated by large JavaScript client side frameworks. There are plenty of good reasons for that, but it can be very inefficient for many use cases, and the framework engineering has become extremely complex. In this article, I want to explore a different approach, one that is more efficient and more flexible, built from smaller building blocks, and well-suited to server side application frameworks like Spring (or similar tools in a range of server side languages). The idea is to embrace the concept of hypermedia, imagine how a next-generation browser would make use of that, and use a small amount of JavaScript to enhance today's browser to that level. Modern browsers ignore custom elements and attributes in HTML, but they allow the author of that content to use JavaScript to define the behaviour for them. There are a few libraries already available that can help with this, and we will be looking at https://htmx.org/[HTMX], https://unpoly.com[Unpoly] and https://turbo.hotwired.dev[Hotwired Turbo]. We will also look at how to use these libraries with https://spring.io/projects/spring-boot[Spring Boot], and how to use them with a traditional server side framework like https://www.thymeleaf.org/[Thymeleaf].
+Front end development these days is dominated by large JavaScript client side frameworks. There are plenty of good reasons for that, but it can be very inefficient for many use cases, and the framework engineering has become extremely complex. In this article, I want to explore a different approach, one that is more efficient and more flexible, built from smaller building blocks, and well-suited to server side application frameworks like Spring (or similar tools in a range of server side languages). The idea is to embrace the concept of hypermedia, imagine how a next-generation browser would make use of that, and use a small amount of JavaScript to enhance today's browser to that level. Modern browsers ignore custom elements and attributes in HTML, but they allow the author of that content to use JavaScript to define the behaviour for them. There are a few libraries already available that can help with this, and we will be looking at [HTMX](https://htmx.org/), [Unpoly](https://unpoly.com) and [Hotwired Turbo](https://turbo.hotwired.dev). We will also look at how to use these libraries with [Spring Boot](https://spring.io/projects/spring-boot), and how to use them with a traditional server side framework like [Thymeleaf](https://www.thymeleaf.org/).
 
-You can find the source code in GitHub (https://github.com/dsyer/webmvc-thymeleaf[dsyer/webmvc-thymeleaf]). The "main" branch is the starting point, and there are branches for each of the libraries we will be exploring.
+You can find the source code in GitHub ([dsyer/webmvc-thymeleaf](https://github.com/dsyer/webmvc-thymeleaf)). The "main" branch is the starting point, and there are branches for each of the libraries we will be exploring.
 
 ## The Starting Point
 
@@ -17,7 +17,7 @@ String user(Map<String, Object> model) {
 }
 ```
 
-image:images/home.jpg[Home Page]
+![Home Page](images/home.jpg)
 
 and one with a form that the user can submit to create a greeting:
 
@@ -31,7 +31,7 @@ String name(Map<String, Object> model, @RequestParam String name) {
 }
 ```
 
-image:images/greet.jpg[Greet Form]
+![Greet Form](images/greet.jpg)
 
 Both tabs are rendered as separate pages on the server, but they use a shared `layout.html` template to display the header and footer. There is a `messages.properties` file with some internationalizable content, although only the default English version is included so far.
 
@@ -49,7 +49,7 @@ The simplest way to do that would be to grab it from a CDN and add it to the `la
 <script src='https://unpkg.com/htmx.org/dist/htmx.min.js'></script>
 ```
 
-Instead of this, in the "htmx" branch of the sample code we used a https://webjars.org[Webjar] to load the library into the classpath, so that would work as well. Spring can do some extra stuff to help the browser cache the library, and it can also help with version management.
+Instead of this, in the "htmx" branch of the sample code we used a [Webjar](https://webjars.org) to load the library into the classpath, so that would work as well. Spring can do some extra stuff to help the browser cache the library, and it can also help with version management.
 
 ### Form Processing
 
@@ -81,7 +81,7 @@ where the "content" element has been identified by ID. Turning to that element, 
 
 With these two small changes in the `greet.html` template, we have a form that submits to the server and updates the page without a full page reload. If you submit the form now, and look at the network activity in the browser developer tools, you will see that the server is re-rendering the whole page, but HTMX is extracting the "content" element and switching its content for us. The images and other static content are not reloaded, and the browser's history is updated to reflect the new state of the page.
 
-image:images/page.jpg[Greet Page]
+![Greet Page](images/page.jpg)
 
 You may also notice that HTMX is adding a `hx-request` header to the request to the server. This is a feature of HTMX that allows you to match requests in the server side code, and we will use that next.
 
@@ -110,7 +110,7 @@ String nameHtmx(Map<String, Object> model, @RequestParam String name) {
 
 If you submit the form now, and look at the network activity in the browser developer tools, you will see that the server is only returning the fragment of the page that is needed to update the content.
 
-image:images/network.jpg[Greet Fragment]
+![Greet Fragment](images/network.jpg)
 
 ### Lazy Loading
 
@@ -170,7 +170,7 @@ Note that we have to `th:remove` the fragment from the template, because the pla
 
 ### Spring Boot HTMX
 
-HTMX has more features that we don't have space to look at in detail here. It is worth mentioning that there is a Java library that can help with those features and it also has some Thymeleaf utilities: https://github.com/wimdeblauwe/htmx-spring-boot[Spring Boot HTMX] by https://github.com/wimdeblauwe[Wim Deblauwe], available as a dependency in Maven Central. It can do the `hx-request` header matching with a custom annotation, and it can also help with other features of HTMX.
+HTMX has more features that we don't have space to look at in detail here. It is worth mentioning that there is a Java library that can help with those features and it also has some Thymeleaf utilities: [Spring Boot HTMX](https://github.com/wimdeblauwe/htmx-spring-boot) by [Wim Deblauwe](https://github.com/wimdeblauwe), available as a dependency in Maven Central. It can do the `hx-request` header matching with a custom annotation, and it can also help with other features of HTMX.
 
 ## Other Libraries
 
