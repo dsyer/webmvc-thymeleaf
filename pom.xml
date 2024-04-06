@@ -14,7 +14,7 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<name>webmvc-thymeleaf</name>
 	<properties>
-		<webjars-bootstrap.version>5.3.2</webjars-bootstrap.version>
+		<webjars-missing.version>1.1.1</webjars-missing.version>
 		<webjars-font-awesome.version>4.7.0</webjars-font-awesome.version>
 		<webjars-htmx.version>1.9.10</webjars-htmx.version>
 		<java.version>17</java.version>
@@ -30,8 +30,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.webjars.npm</groupId>
-			<artifactId>bootstrap</artifactId>
-			<version>${webjars-bootstrap.version}</version>
+			<artifactId>missing.css</artifactId>
+			<version>${webjars-missing.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.webjars.npm</groupId>

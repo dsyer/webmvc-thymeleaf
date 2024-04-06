@@ -5,15 +5,15 @@
 <body>
 
   <h2 th:text="#{greeting}">Welcome</h2>
-  <div class="row">
-    <div class="col-md-12">
-      <form th:action="@{/greet}" th:hx-post="@{/greet}" method="post" hx-target="#content">
-        <input type="text" name="name" th:value="${name}"/>
-        <button type="submit" class="btn btn-primary">Greet</button>
+  <div class="grid">
+    <div data-cols="1">
+        <form th:action="@{/greet}" th:hx-post="@{/greet}" method="post" hx-target="#content">
+            <input type="text" name="name" th:value="${name}" />
+        <button type="submit">Greet</button>
       </form>
     </div>
-    <div th:fragment="content" id="content" class="col-md-12" hx-swap-oob="true">
-      <span th:text="${greeting}">Hello, World</span><br/>
+    <div data-cols="2">
+      <span th:fragment="content" id="content" th:text="${greeting}">Hello, World</span><br />
       <span th:text="${time}">21:00</span>
     </div>
   </div>
