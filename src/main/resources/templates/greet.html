@@ -4,21 +4,21 @@
 
 <body>
 
-  <h2 th:text="#{greeting}">Welcome</h2>
-  <div class="row">
+    <h2 th:text="#{greeting}">Welcome</h2>
     <turbo-frame id="content">
-      <div class="col-md-12">
-        <form th:action="@{/greet}" method="post">
-          <input type="text" name="name" th:value="${name}" />
-          <button type="submit" class="btn btn-primary">Greet</button>
-        </form>
-      </div>
-      <div class="col-md-12">
-        <span th:text="${greeting}">Hello, World</span><br />
-        <span th:text="${time}">21:00</span>
-      </div>
+        <div class="grid">
+            <div data-cols="1">
+                <form th:action="@{/greet}" method="post">
+                    <input type="text" name="name" th:value="${name}" />
+                    <button type="submit">Greet</button>
+                </form>
+            </div>
+            <div data-cols="2">
+                <span th:text="${greeting}">Hello, World</span><br />
+                <span th:text="${time}">21:00</span>
+            </div>
+        </div>
     </turbo-frame>
-  </div>
 
 </body>
 

@@ -3,78 +3,73 @@
 
 <head>
 
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Demo :: a Spring Framework demonstration</title>
+    <title>Demo :: a Spring Framework demonstration</title>
 
-  <!--[if lt IE 9]>
+    <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/missing.css/1.1.1/dist/missing.min.css}" />
     <link th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}" rel="stylesheet">
+    <script type="module" th:src="@{/webjars/missing.css/1.1.1/dist/js/overflow-nav.js}"></script>
     <script th:src="@{/webjars/hotwired__turbo/8.0.2/dist/turbo.es2017-umd.js}"></script>
+
+    <style>
+        :root {
+            --accent: var(--lime-9);
+            --muted-accent: var(--lime-6);
+            --interactive-bg: var(--lime-3);
+        }
+    </style>
 
 </head>
 
 <body>
 
-  <nav class="navbar navbar-expand-lg" role="navigation">
-    <div class="container-fluid">
-      <a class="navbar-brand" th:href="@{/}"><span></span></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-navbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="main-navbar">
+    <header class="navbar" data-overflow-nav>
+        <nav role="toolbar">
+            <div>
+                <button aria-hidden="true" type="button" data-nav-expander class="iconbutton"
+                    aria-pressed="false"></button>
+            </div>
+            <ul role="list" th:remove="all">
+                <li th:fragment="menuItem (link,active,title,glyph,text)">
+                    <a th:href="@{__${link}__}" th:title="${title}" th:aria-current="${active==menu ? 'page' : ''}">
+                        <span th:class="'fa fa-'+${glyph}" class="fa fa-home"></span>
+                        <span th:text="${text}">Template</span>
+                    </a>
+                </li>
+            </ul>
+            <ul role="list">
+                <li th:replace="~{::menuItem ('/','home','home page','home','Home')}">
+                    <span class="fa fa-home" aria-hidden="true"></span>
+                    <span>Home</span>
+                </li>
+                <li th:replace="~{::menuItem ('/greet','greet','greet','thumbs-up','Greet')}">
+                    <span class="fa fa-code" aria-hidden="true"></span>
+                    <span>Code</span>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
 
-        <ul class="nav nav-tabs me-auto mb-2 mb-lg-0" th:remove="all" role="tablist">
+        <th:block th:insert="${template}" />
 
-          <li th:fragment="menuItem (link,active,title,glyph,text)" th:class="nav-item">
-            <a th:class="${active==menu ? 'nav-link active' : 'nav-link'}" th:href="@{__${link}__}" th:title="${title}">
-              <span th:class="'fa fa-'+${glyph}" class="fa fa-home"></span>
-              <span th:text="${text}">Template</span>
-            </a>
-          </li>
+    </main>
 
-        </ul>
-
-        <ul class="nav nav-tabs me-auto" role="tablist">
-
-          <li th:replace="~{::menuItem ('/','home','home page','home','Home')}">
-            <span class="fa fa-home" aria-hidden="true"></span>
-            <span>Home</span>
-          </li>
-          <li th:replace="~{::menuItem ('/greet','greet','greet','thumbs-up','Greet')}">
-            <span class="fa fa-code" aria-hidden="true"></span>
-            <span>Code</span>
-          </li>
-
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <div class="container-fluid">
-    <div class="container">
-
-      <th:block th:insert="${template}" />
-
-      <br />
-      <br />
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <img src="../static/images/spring-logo.svg" th:src="@{/images/spring-logo.svg}" alt="Logo" style="width:200px;" loading="lazy">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script th:src="@{/webjars/bootstrap/5.3.2/dist/js/bootstrap.bundle.min.js}"></script>
+    <footer>
+        <p>
+            <img src="../static/images/spring-logo.svg" th:src="@{/images/spring-logo.svg}" alt="Logo"
+                style="width:200px;" loading="lazy">
+        </p>
+    </footer>
 
 </body>
 
