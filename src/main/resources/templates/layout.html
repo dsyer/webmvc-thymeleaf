@@ -31,7 +31,7 @@
 
 <body>
 
-    <header class="navbar" data-overflow-nav>
+    <header id="header" class="navbar" data-overflow-nav hx-swap-oob="true">
         <nav role="toolbar">
             <div>
                 <button aria-hidden="true" type="button" data-nav-expander class="iconbutton"
@@ -39,7 +39,7 @@
             </div>
             <ul role="list" th:remove="all">
                 <li th:fragment="menuItem (link,active,title,glyph,text)">
-                    <a th:href="@{__${link}__}" th:title="${title}" th:aria-current="${active==menu ? 'page' : ''}">
+                    <a th:href="@{__${link}__}" th:title="${title}" th:aria-current="${active==menu ? 'page' : ''}" hx-target="main" hx-select="header main" th:hx-get="@{__${link}__}" >
                         <span th:class="'fa fa-'+${glyph}" class="fa fa-home"></span>
                         <span th:text="${text}">Template</span>
                     </a>
@@ -57,7 +57,7 @@
             </ul>
         </nav>
     </header>
-    <main>
+    <main id="main" hx-swap-oob="true">
         <th:block th:insert="${template}" />
     </main>
     <footer>
