@@ -31,7 +31,7 @@
 
 <body>
 
-    <header id="header" class="navbar" data-overflow-nav hx-swap-oob="true">
+    <header class="navbar" data-overflow-nav hx-swap-oob="true:header">
         <nav role="toolbar">
             <div>
                 <button aria-hidden="true" type="button" data-nav-expander class="iconbutton"
@@ -57,7 +57,7 @@
             </ul>
         </nav>
     </header>
-    <main id="main" hx-swap-oob="true">
+    <main hx-swap-oob="true:main">
         <th:block th:insert="${template}" />
     </main>
     <footer>
