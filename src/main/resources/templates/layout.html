@@ -39,7 +39,7 @@
             </div>
             <ul role="list" th:remove="all">
                 <li th:fragment="menuItem (link,active,title,glyph,text)">
-                    <a th:href="@{__${link}__}" th:title="${title}" th:aria-current="${active==menu ? 'page' : ''}" th:hx-get="@{__${link}__}" >
+                    <a th:href="@{__${link}__}" th:title="${title}" th:aria-current="${active==menu ? 'page' : ''}" th:hx-get="@{__${link}__}" hx-push-url="true">
                         <span th:class="'fa fa-'+${glyph}" class="fa fa-home"></span>
                         <span th:text="${text}">Template</span>
                     </a>
